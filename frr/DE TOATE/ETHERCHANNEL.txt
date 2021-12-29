@@ -1,0 +1,15 @@
+interface range fa 0/15-17
+	channel-group X mode active
+	exit
+
+
+UNDE X ESTE:
+
+canal 1 acc1-d1
+canal 2 acc1-d2
+canal 3 acc2-d1
+canal4 acc2-d2
+
+
+poate cauza bug packet tracer -> orga de lumini -> restart packet tracer / buton de reload
+NU DATI FAST FORWARD LA PACKET TRACER - CAUZA BUG

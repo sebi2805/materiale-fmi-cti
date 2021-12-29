@@ -1,0 +1,22 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/Users/Alexandru/Documents/GitHub/teme-fmi-cti/poo/Tema3/main.cpp
+iostream
+-
+cstdlib
+-
+vector
+-
+cstring
+-
+fstream
+-
+unordered_map
+-
+
