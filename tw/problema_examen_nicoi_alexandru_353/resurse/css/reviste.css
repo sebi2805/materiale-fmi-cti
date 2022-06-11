@@ -1,0 +1,42 @@
+.grid-reviste{
+    display: grid;
+    grid-template-columns:repeat(3, 1fr);
+    background-color: white;
+}
+
+.grid-reviste .revista:nth-child(6n+1){
+    background-color: aquamarine;
+}
+ 
+.grid-reviste .revista:nth-child(6n+2){
+    background-color: aquamarine;
+}
+
+
+.grid-reviste .revista:nth-child(6n+3){
+    background-color: aquamarine;
+}
+
+.nota{
+    transition:color 1s ease;
+    transition: all 0.5s linear;
+}
+
+.nota:hover {
+    color:green;
+    font-size: 21px;
+}
+
+.val-nume {
+    font: italic;
+    text-decoration: underline
+}
+
+#val-pret {
+    transition:all 1s ease-out;
+}
+
+#val-pret:hover{
+    background-color:red;
+    font-weight: bold;
+}

@@ -1,0 +1,226 @@
+
+
+##################
+Solutii obtinute cu breadth first:
+Solutie: 1
+1 2 3
+4 5 6
+7 8 0
+
+MATRICEA DE PLACUTE BLOCATE (0 - DEBLOCAT, 1 - BLOCAT)
+0 0 0
+0 0 0
+0 0 0
+---------------------------------
+Cost: 0
+Lungime:1
+Nr de noduri maxim in memorie: 1
+TIMP EFECTUAT: 0 ms
+=======================================================
+
+
+##################
+Solutii obtinute cu depth first:
+Solutie: 1
+1 2 3
+4 5 6
+7 8 0
+
+MATRICEA DE PLACUTE BLOCATE (0 - DEBLOCAT, 1 - BLOCAT)
+0 0 0
+0 0 0
+0 0 0
+---------------------------------
+Cost: 0
+Lungime:1
+TIMP EFECTUAT: 0 ms
+=======================================================
+
+
+##################
+Solutii obtinute cu depth first iterativ:
+Solutie: 1
+1 2 3
+4 5 6
+7 8 0
+
+MATRICEA DE PLACUTE BLOCATE (0 - DEBLOCAT, 1 - BLOCAT)
+0 0 0
+0 0 0
+0 0 0
+---------------------------------
+Cost: 0
+Lungime:1
+TIMP EFECTUAT: 1 ms
+=======================================================
+
+
+##################
+Solutii obtinute cu UCS:
+Solutie: 1
+1 2 3
+4 5 6
+7 8 0
+
+MATRICEA DE PLACUTE BLOCATE (0 - DEBLOCAT, 1 - BLOCAT)
+0 0 0
+0 0 0
+0 0 0
+---------------------------------
+Cost: 0
+Lungime:1
+Nr de noduri maxim in memorie: 1
+TIMP EFECTUAT: 0 ms
+=======================================================
+
+
+##################
+Solutii obtinute cu A* euristica banala:
+Solutie: 1
+1 2 3
+4 5 6
+7 8 0
+
+MATRICEA DE PLACUTE BLOCATE (0 - DEBLOCAT, 1 - BLOCAT)
+0 0 0
+0 0 0
+0 0 0
+---------------------------------
+Cost: 0
+Lungime:1
+Nr de noduri maxim in memorie: 1
+TIMP EFECTUAT: 0 ms
+=======================================================
+
+
+##################
+Solutii obtinute cu A* euristica admisibila 1:
+Solutie: 1
+1 2 3
+4 5 6
+7 8 0
+
+MATRICEA DE PLACUTE BLOCATE (0 - DEBLOCAT, 1 - BLOCAT)
+0 0 0
+0 0 0
+0 0 0
+---------------------------------
+Cost: 0
+Lungime:1
+Nr de noduri maxim in memorie: 1
+TIMP EFECTUAT: 0 ms
+=======================================================
+
+
+##################
+Solutii obtinute cu A* euristica admisibila 2:
+Solutie: 1
+1 2 3
+4 5 6
+7 8 0
+
+MATRICEA DE PLACUTE BLOCATE (0 - DEBLOCAT, 1 - BLOCAT)
+0 0 0
+0 0 0
+0 0 0
+---------------------------------
+Cost: 0
+Lungime:1
+Nr de noduri maxim in memorie: 1
+TIMP EFECTUAT: 0 ms
+=======================================================
+
+
+##################
+Solutii obtinute cu A* euristica neadmisibila:
+Solutie: 1
+1 2 3
+4 5 6
+7 8 0
+
+MATRICEA DE PLACUTE BLOCATE (0 - DEBLOCAT, 1 - BLOCAT)
+0 0 0
+0 0 0
+0 0 0
+---------------------------------
+Cost: 0
+Lungime:1
+Nr de noduri maxim in memorie: 1
+TIMP EFECTUAT: 0 ms
+=======================================================
+
+
+##################
+Solutii obtinute cu Greedy euristica banala:
+Solutie: 1
+1 2 3
+4 5 6
+7 8 0
+
+MATRICEA DE PLACUTE BLOCATE (0 - DEBLOCAT, 1 - BLOCAT)
+0 0 0
+0 0 0
+0 0 0
+---------------------------------
+Cost: 0
+Lungime:1
+Nr de noduri maxim in memorie: 1
+TIMP EFECTUAT: 1 ms
+=======================================================
+
+
+##################
+Solutii obtinute cu Greedy euristica admisibila 1:
+Solutie: 1
+1 2 3
+4 5 6
+7 8 0
+
+MATRICEA DE PLACUTE BLOCATE (0 - DEBLOCAT, 1 - BLOCAT)
+0 0 0
+0 0 0
+0 0 0
+---------------------------------
+Cost: 0
+Lungime:1
+Nr de noduri maxim in memorie: 1
+TIMP EFECTUAT: 0 ms
+=======================================================
+
+
+##################
+Solutii obtinute cu Greedy euristica admisibila 2:
+Solutie: 1
+1 2 3
+4 5 6
+7 8 0
+
+MATRICEA DE PLACUTE BLOCATE (0 - DEBLOCAT, 1 - BLOCAT)
+0 0 0
+0 0 0
+0 0 0
+---------------------------------
+Cost: 0
+Lungime:1
+Nr de noduri maxim in memorie: 1
+TIMP EFECTUAT: 0 ms
+=======================================================
+
+
+##################
+Solutii obtinute cu Greedy euristica neadmisibila:
+Solutie: 1
+1 2 3
+4 5 6
+7 8 0
+
+MATRICEA DE PLACUTE BLOCATE (0 - DEBLOCAT, 1 - BLOCAT)
+0 0 0
+0 0 0
+0 0 0
+---------------------------------
+Cost: 0
+Lungime:1
+Nr de noduri maxim in memorie: 1
+TIMP EFECTUAT: 1 ms
+=======================================================

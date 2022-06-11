@@ -1,0 +1,271 @@
+Sisteme de operare
+
+numele: NICOI ALEXANDRU
+
+grupa: 353
+
+adresa e-mail: alexandru.nicoi@s.unibuc.ro
+
+Instructiuni de completare:
+- Completati antetul cu datele personale.
+- Inserati rezolvarea fiecarui subiect in acest fisier, dupa 'Rezolvare'.
+- Rezolvarile care cer generarea de cod vor fi punctate doar daca codul
+    este compilabil si fara warning cu optiunea '-Wall' (chiar daca rezolva
+    incomplet cerinta sau face erori la executie).
+- Redenumiti acest fisier sub forma urmatoare (inlocuind adecvat grupa, nume,
+    prenume, data in format zzllaaaa):
+ 
+      so_grupa_nume_prenume_data.txt
+
+- Atasati fisierul unui mesaj e-mail care are ca subiect un text identic cu
+    numele fisierului (fara .txt) si pe care il trimiteti in intervalul orar
+    al probei de la adresa dumneavoastra institutionala (fmi sau unibuc) la
+    ambele adrese urmatoare: dragulicid@yahoo.com si dra@fmi.unibuc.ro
+
+
+1. Consideram executarea urmatorului cod C:
+
+   int n = -1;
+   while(fork()) do if(n -=- 1) exit(n); while(fork());
+   printf("%d\n", n);
+
+   Cate procese apar in total (incluzand si procesul initial) ?
+   Descrieti dependentele acestor procese prin perechi de forma
+ p1(n1) -> p2(n2), insemnand: procesul p1 afisaza n1 si genereaza
+ procesul p2 care afisaza n2; daca un proces p nu afisaza nimic,
+ notati p(x).
+   Justificati raspunsurile.
+   Completati codul la un program intreg care, in plus, sa afiseze si PID-ul
+ parintelui si PID-ul propriu (pentru a putea dovedi cele afirmate mai
+ devreme). Este permisa doar inserarea de cod si schimbarea indentarii, nu si
+ stergerea sau modificarea codului existent.
+
+Rezolvare:
+==========
+Procesul initial este compilatorul, apelat prin gcc.
+Codul va genera 3 procese. Primul proces este cel al executarii codului. 
+Dupa aceea va mai face un fork() care nu va intra in while pentru ca este un proces copil, parintele va intra in do while, 
+va itera odata pentru ca n -= -1 este egal cu 0 si nu va ajunge la exit, 
+va apela un nou copil, care el va fi in do while, il va face pe n = 0 
+insa va iesi din el si va iesi si din while, va afisa 0, 
+iar programul parinte avand n = 0, in cadrul if-ului va deveni 1, conditie true, 
+iesind din program din cauza exit-ului.
+
+consideram p0 compilatorul 
+
+p0()->p1()->p2(-1)->p3(0)
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+
+int main() {
+    int n = -1;
+    while (fork()) {
+        do {
+            //
+            if (n -= -1){
+                printf("parinte %d copil %d la iesire in if %d\n",  getppid(), getpid(), n);
+                exit(n);
+            }
+
+        } while (fork());
+    }
+
+    printf("parinte %d copil %d la iesire dupa while %d\n",getppid(), getpid(), n);
+    printf("%d\n", n);
+}
+
+
+2. Intr-un sistem de calcul planificat round-robin, se pornesc doua procese,
+primul la ora 12:00, al doilea la ora 12:30. Fiecare proces petrece 50%
+din timp in I/O si necesita 60 minute timp procesor (deci, rulat singur
+ar dura 120 min). La ce ora ambele procese sunt terminate ? Justificati.
+ Presupunem neglijabila supraincarcarea legata de sarcinile administrative.
+
+Rezolvare:
+==========
+Procesul 1 incepe la ora 12:00.
+Procesul 2 incepe la 12:30.
+Pana la ora 13:00 procesul 1 este in I/0.
+Procesul p2 va fi timp de o ora in timpul I/0, de la ora de inceput (12:30) pana la 13:30. Tot pana la aceasta ora procesul 1 va rula (in jumatatea de ora de la 13-13:30 este chiar singurul care foloseste procesorul).
+P1 se va termina la 14:30, din cauza algoritmului round-robin, insa P2 va mai folosi inca jumatate de ora procesorul, pana la ora 15:00, ramanand singur in coada algoritmului.
+
+
+3. Rutina de tratare a intreruperii de ceas de pe un anumit calculator are
+ nevoie de 2 msec (incluzand supraincarcarea pentru comutarea proceselor)
+ per tact de ceas. Ceasul genereaza tacti la frecventa de 70 Hz. Ce procent
+ din capacitatea procesorului este dedicat ceasului ? Justificati raspunsul
+ (aratati calculul).
+
+Rezolvare:
+==========
+Transformam frecventa in secunde
+timp (s) = 1 / frecv (hz) = 0.01428 s = 14.28 ms
+Avand in vedere ca rutina dureaza 2 ms, iar tactul de ceas la 14.28 ms, procentul utilizarii
+procesorului este
+2 / 14 = 14.28 => utilizare de aproximativ 14% pe procesor.
+
+ 
+
+4. Scrieti o functie in limbajul C:
+
+    int upclin(char *numefis);
+
+ care converteste la litera mare (upcase) ultimul caracter din fiecare
+ linie din fisierul specificat de 'numefis'; upcase-ul unei litere mici
+ se obtine scazand din codul ei 32 (codul caracterulul ' '), iar upcase-ul
+ unui caracter care nu este litera mica este el insusi; un caracter este la
+ sfarsit de linie daca este urmat de '\n' sau de sfarsitul fisierului.
+   Functia returneaza numarul de caractere care au fost modificate sau -1
+ in caz de eroare.
+   Memoria folosita va fi limitata de o constanta (deci, nu se va incarca tot
+ continutul fisierului in memorie) iar la iesirea din functie fisierul va fi
+ inchis.
+   Pentru scrierea functiei, completati programul urmator, inlocuind cele
+ doua comentarii:
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+
+int upclin(char *numefis) {
+
+
+int upclin(char *numefis) {
+    FILE* in = fopen(numefis, "r+");
+    if(in == NULL) {
+        printf("Fisierul input nu este gasit!\n");
+        return -1;
+    }
+    int count = 0;
+    char ant;
+    char c;
+    if((ant = fgetc(in)) != EOF) {
+       while((c = fgetc(in)) != EOF){
+           if(c == '\n')
+               if(ant >= 'a' && ant <= 'z') {
+                   fseek(in, ftell(in) - 2, SEEK_SET);
+                   fputc(ant - 32, in);
+                   fseek(in, ftell(in) + 1, SEEK_SET);
+                   count++;
+               }
+           ant = c;
+       }
+       if(c == EOF) {
+           fseek(in, ftell(in) - 1, SEEK_SET);
+           if(ant >= 'a' && ant <= 'z') {
+               fputc(ant - 32, in);
+               count++;
+           }
+           fseek(in, ftell(in) + 1, SEEK_SET);
+       }
+    } else {
+        return -1;
+    }
+    fclose(in);
+    return count;
+}
+
+}
+
+int main(int argc, char *argv[]) {
+  int k;
+  if(argc != 2)
+    {fprintf(stderr, "Utilizare: %s fisier\n", argv[0]); return 1;}
+  if((k = upclin(argv[1])) == -1)
+    {perror(argv[1]); return  1;}
+  printf("%d\n", k);
+  return 0;
+}
+
+  Exemplu de testare (presupunem ca programul executabil este 'prog'):
+
+$echo abc def > f ; echo ij2 >> f ; echo ghi jk >> f
+$./prog f
+2
+$cat f
+abc deF
+ij2
+ghi jK
+$echo abc def > f ; echo ij2 >> f ; echo -n ghi jk >> f
+$./prog f
+2
+$cat f
+abc deF
+ij2
+ghi jK$
+
+Rezolvare:
+==========
+Mai sus in cod
+
+
+5. Scrieti un program in limbajul C care primeste ca argument in linia
+ de comanda specificatorul unui director si efectueaza urmatoarele:
+ - creaza in directorul curent un subdirector cu numele proprietarului
+  efectiv al procesului apelant si cu drepturi de citire, scriere si
+  executie pentru proprietar;
+ - creaza in noul director legaturi simbolice catre fisierele obisnuite
+  (regular) din directorul dat ca argument in linia de omanda; numele
+  legaturilor simbolice va coincide cu numele fisierelor referite;
+ - daca un fisier sursa nu poate fi accesat, sau nu se poate crea legatura
+  simbolica, se semnaleaza eroare dar se continua cu fisierele urmatoare.
+ Putem presupune ca toti specificatorii sunt siruri nevide, nu sunt
+ terminate cu "/" si au cel mult PATH_MAX - 1 caractere.
+
+Exemplu de testare (presupunem ca programul este "./prog"):
+
+$ls -l test
+total 12
+-rw-rw-r-- 1 dragulici dragulici    5 Jan  8 16:04 a
+drwxrwxr-x 2 dragulici dragulici 4096 Jan  8 16:04 b
+-rw-rw-r-- 1 dragulici dragulici    5 Jan  8 16:04 c
+$./prog test
+$ls -l dragulici
+total 0
+lrwxrwxrwx 1 dragulici dragulici 6 Jan  8 16:10 a -> test/a
+lrwxrwxrwx 1 dragulici dragulici 6 Jan  8 16:10 c -> test/c
+
+Rezolvare:
+==========
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <sys/stat.h>
+
+int main(int argc, char *argv[])
+{
+    if(argc != 2) {
+        printf("Numar gresit de argumente!\n");
+    } else if (argc == 2) {
+        char *p = getenv("USER");
+        if(p == NULL) {
+            printf("Nu se poate citi USERUL\n");
+            exit(0);
+        }
+        mkdir(p, S_IRWXU);
+    }
+
+    return 0;
+}
+
+
+6. Scrieti un program in limbajul C care primeste ca argumente in linia
+ de comanda 3 programe (specificatorii fisierelor executabile) si le
+ lanseaza ca procese copil a.i. sa formeze un filtru circular. De exemplu,
+ daca programele sunt 'p0', 'p1', 'p2', ele vor comunica prin tuburi astfel:
+
+    --> p0 ---> p1 ---> p2 -->  (fiecare proces are stdin la tubul din stanga
+    |                        |   si stdout la tubul din dreapta)
+    --------------------------
+ Atat parintele comun cat si copiii isi vor inchide descriptorii nefolositi
+ pe tuburi, a.i. in timpul rularii copiilor tuburile vor avea cate un singur
+ scriitor si un singur cititor.
+ Procesul initial va astepta terminarea copiilor si va afisa numele celor
+ care s-au terminat normal.
+
+ Rezolvare:
+ ==========
+

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ro" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Nicoi Alexandru">
+    <title>AlexTruck Store</title>
+    <link rel="stylesheet" href="resurse/css/reviste.css"/>
+</head>
+
+<body>
+<header>
+    <div id="div-header">
+    <h1 id="top">EXAMEN TEHNICI WEB</h1>
+</header>
+
+
+<main>
+    <script type="text/javascript" src=/resurse/js/reviste.js></script>
+    <div id='filtering'></div>
+    <button onclick="clickReset('filtering')">Reset</button>
+    <div id='sorting'></div>
+    <button onclick="clickReset('sorting')">Reset</button>
+    <h2>REVISTE</h2>
+    <label> Pret maxim: 0<input type="range" id="inp-pret" value="0" min="0"  max="130"> 130<span id="infoRange">(0)</span></label>
+    <button id="setlocalstorage"  >Seteaza in local storage</button>
+    <br>
+    <input class= "checkboxfiltrare" type="checkbox" id="1" value="sport" onclick="getSelectItemThat(this.id)" /> sport
+    <input class= "checkboxfiltrare" type="checkbox" id="2" value="tehnica" onclick="getSelectItemThat(this.id)" /> tehnica
+    <input class= "checkboxfiltrare" type="checkbox" id="3" value="stiinta" onclick="getSelectItemThat(this.id)" /> stiinta
+    <input class= "checkboxfiltrare" type="checkbox" id="4" value="turism" onclick="getSelectItemThat(this.id)" /> turism
+    <button id="filtrare"  >Filtreaza</button>
+    <button id="reset"  >Reseteaza</button>
+    <br>
+    <form id="form_inreg"  method="post" class="sortare" action="/reviste" enctype="multipart/form-data">
+        <input type="radio" id="html" name="cumsortez" value="cresc">
+        <label for="asc">cresc</label>
+        <input type="radio" id="css" name="cumsortez" value="descresc">
+        <label for="desc">descresc</label>
+        <input type="submit" value="Submit">
+    </form>
+    <div class='grid-reviste'>
+        <% for (let revista of locals.reviste) { %>
+            <article id="idr-<%-revista.id%>" class="revista">
+                <h2 class="val-nume"><%- revista.titlu %> (<%- revista.nrpagini%>) </h3>
+                <p><span id="val-tip-ap"><%- revista.aparitie%></span> <span class="val-pret"><%-revista.pret%></span></p>
+                <span class="val-tematica"><%- revista.tematici%></span>
+            </article>
+        <% } %>
+    </div>
+    <form id="form_mail"  method="post" action="/emailtrimis" enctype="multipart/form-data">
+        <label> Tematica: <input type="text" name="tematica" id="tematica"> </label> 
+        <label> E-mail: <input type="text" name="email" id="email"></label>
+        <input type="submit" value="SubmitEmail">
+    </form>
+</main>
+
+<footer>
+</footer>
+</body>
+</html>
