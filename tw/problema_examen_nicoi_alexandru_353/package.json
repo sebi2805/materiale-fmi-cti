@@ -1,0 +1,20 @@
+{
+  "name": "simulare",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^3.1.6",
+    "express": "^4.17.2",
+    "express-session": "^1.17.2",
+    "formidable": "^2.0.1",
+    "mysql": "^2.18.1",
+    "nodemailer": "^6.7.2",
+    "pg": "^8.7.1"
+  }
+}

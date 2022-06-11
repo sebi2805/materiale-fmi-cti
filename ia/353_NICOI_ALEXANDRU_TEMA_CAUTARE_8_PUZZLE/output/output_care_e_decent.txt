@@ -1,0 +1,478 @@
+
+
+##################
+Solutii obtinute cu breadth first:
+Solutie: 1
+1 2 3
+4 5 6
+7 0 8
+
+MATRICEA DE PLACUTE BLOCATE (0 - DEBLOCAT, 1 - BLOCAT)
+0 0 0
+0 0 0
+0 0 0
+---------------------------------
+1 2 3
+4 5 6
+7 8 0
+
+MATRICEA DE PLACUTE BLOCATE (0 - DEBLOCAT, 1 - BLOCAT)
+0 0 0
+0 0 0
+0 0 0
+---------------------------------
+Cost: 1
+Lungime:2
+Nr de noduri maxim in memorie: 6
+TIMP EFECTUAT: 1 ms
+=======================================================
+
+
+##################
+Solutii obtinute cu depth first:
+Solutie: 1
+1 2 3
+4 5 6
+7 0 8
+
+MATRICEA DE PLACUTE BLOCATE (0 - DEBLOCAT, 1 - BLOCAT)
+0 0 0
+0 0 0
+0 0 0
+---------------------------------
+1 2 3
+4 5 6
+0 7 8
+
+MATRICEA DE PLACUTE BLOCATE (0 - DEBLOCAT, 1 - BLOCAT)
+0 0 0
+0 0 0
+0 0 0
+---------------------------------
+1 2 3
+0 5 6
+4 7 8
+
+MATRICEA DE PLACUTE BLOCATE (0 - DEBLOCAT, 1 - BLOCAT)
+0 0 0
+0 0 0
+0 0 0
+---------------------------------
+1 2 3
+5 0 6
+4 7 8
+
+MATRICEA DE PLACUTE BLOCATE (0 - DEBLOCAT, 1 - BLOCAT)
+0 0 0
+0 0 0
+0 0 0
+---------------------------------
+1 2 3
+5 6 0
+4 7 8
+
+MATRICEA DE PLACUTE BLOCATE (0 - DEBLOCAT, 1 - BLOCAT)
+0 0 0
+0 0 0
+0 0 0
+---------------------------------
+1 2 0
+5 6 3
+4 7 8
+
+MATRICEA DE PLACUTE BLOCATE (0 - DEBLOCAT, 1 - BLOCAT)
+0 0 0
+0 0 0
+0 0 0
+---------------------------------
+1 0 2
+5 6 3
+4 7 8
+
+MATRICEA DE PLACUTE BLOCATE (0 - DEBLOCAT, 1 - BLOCAT)
+0 0 0
+0 0 0
+0 0 0
+---------------------------------
+0 1 2
+5 6 3
+4 7 8
+
+MATRICEA DE PLACUTE BLOCATE (0 - DEBLOCAT, 1 - BLOCAT)
+0 0 0
+0 0 0
+0 0 0
+---------------------------------
+5 1 2
+0 6 3
+4 7 8
+
+MATRICEA DE PLACUTE BLOCATE (0 - DEBLOCAT, 1 - BLOCAT)
+0 0 0
+1 0 0
+0 0 0
+---------------------------------
+5 1 2
+4 6 3
+0 7 8
+
+MATRICEA DE PLACUTE BLOCATE (0 - DEBLOCAT, 1 - BLOCAT)
+0 0 0
+1 0 0
+1 0 0
+---------------------------------
+5 1 2
+4 6 3
+7 0 8
+
+MATRICEA DE PLACUTE BLOCATE (0 - DEBLOCAT, 1 - BLOCAT)
+0 0 0
+1 0 0
+1 0 0
+---------------------------------
+5 1 2
+4 6 3
+7 8 0
+
+MATRICEA DE PLACUTE BLOCATE (0 - DEBLOCAT, 1 - BLOCAT)
+0 0 0
+1 0 0
+1 0 0
+---------------------------------
+5 1 2
+4 0 3
+7 8 6
+
+MATRICEA DE PLACUTE BLOCATE (0 - DEBLOCAT, 1 - BLOCAT)
+0 0 0
+1 1 0
+1 0 0
+---------------------------------
+0 1 2
+4 5 3
+7 8 6
+
+MATRICEA DE PLACUTE BLOCATE (0 - DEBLOCAT, 1 - BLOCAT)
+1 0 0
+1 1 0
+1 0 0
+---------------------------------
+1 0 2
+4 5 3
+7 8 6
+
+MATRICEA DE PLACUTE BLOCATE (0 - DEBLOCAT, 1 - BLOCAT)
+1 1 0
+1 1 0
+1 0 0
+---------------------------------
+1 2 0
+4 5 3
+7 8 6
+
+MATRICEA DE PLACUTE BLOCATE (0 - DEBLOCAT, 1 - BLOCAT)
+1 1 1
+1 1 0
+1 0 0
+---------------------------------
+1 2 3
+4 5 0
+7 8 6
+
+MATRICEA DE PLACUTE BLOCATE (0 - DEBLOCAT, 1 - BLOCAT)
+1 1 1
+1 1 1
+1 0 0
+---------------------------------
+1 2 3
+4 5 6
+7 8 0
+
+MATRICEA DE PLACUTE BLOCATE (0 - DEBLOCAT, 1 - BLOCAT)
+1 1 1
+1 1 1
+1 0 1
+---------------------------------
+Cost: 19
+Lungime:18
+TIMP EFECTUAT: 114 ms
+=======================================================
+
+
+##################
+Solutii obtinute cu depth first iterativ:
+Solutie: 1
+1 2 3
+4 5 6
+7 0 8
+
+MATRICEA DE PLACUTE BLOCATE (0 - DEBLOCAT, 1 - BLOCAT)
+0 0 0
+0 0 0
+0 0 0
+---------------------------------
+1 2 3
+4 5 6
+7 8 0
+
+MATRICEA DE PLACUTE BLOCATE (0 - DEBLOCAT, 1 - BLOCAT)
+0 0 0
+0 0 0
+0 0 0
+---------------------------------
+Cost: 1
+Lungime:2
+TIMP EFECTUAT: 1 ms
+=======================================================
+
+
+##################
+Solutii obtinute cu UCS:
+Solutie: 1
+1 2 3
+4 5 6
+7 0 8
+
+MATRICEA DE PLACUTE BLOCATE (0 - DEBLOCAT, 1 - BLOCAT)
+0 0 0
+0 0 0
+0 0 0
+---------------------------------
+1 2 3
+4 5 6
+7 8 0
+
+MATRICEA DE PLACUTE BLOCATE (0 - DEBLOCAT, 1 - BLOCAT)
+0 0 0
+0 0 0
+0 0 0
+---------------------------------
+Cost: 1
+Lungime:2
+Nr de noduri maxim in memorie: 6
+TIMP EFECTUAT: 1 ms
+=======================================================
+
+
+##################
+Solutii obtinute cu A* euristica banala:
+Solutie: 1
+1 2 3
+4 5 6
+7 0 8
+
+MATRICEA DE PLACUTE BLOCATE (0 - DEBLOCAT, 1 - BLOCAT)
+0 0 0
+0 0 0
+0 0 0
+---------------------------------
+1 2 3
+4 5 6
+7 8 0
+
+MATRICEA DE PLACUTE BLOCATE (0 - DEBLOCAT, 1 - BLOCAT)
+0 0 0
+0 0 0
+0 0 0
+---------------------------------
+Cost: 1
+Lungime:2
+Nr de noduri maxim in memorie: 5
+TIMP EFECTUAT: 0 ms
+=======================================================
+
+
+##################
+Solutii obtinute cu A* euristica admisibila 1:
+Solutie: 1
+1 2 3
+4 5 6
+7 0 8
+
+MATRICEA DE PLACUTE BLOCATE (0 - DEBLOCAT, 1 - BLOCAT)
+0 0 0
+0 0 0
+0 0 0
+---------------------------------
+1 2 3
+4 5 6
+7 8 0
+
+MATRICEA DE PLACUTE BLOCATE (0 - DEBLOCAT, 1 - BLOCAT)
+0 0 0
+0 0 0
+0 0 0
+---------------------------------
+Cost: 1
+Lungime:2
+Nr de noduri maxim in memorie: 5
+TIMP EFECTUAT: 1 ms
+=======================================================
+
+
+##################
+Solutii obtinute cu A* euristica admisibila 2:
+Solutie: 1
+1 2 3
+4 5 6
+7 0 8
+
+MATRICEA DE PLACUTE BLOCATE (0 - DEBLOCAT, 1 - BLOCAT)
+0 0 0
+0 0 0
+0 0 0
+---------------------------------
+1 2 3
+4 5 6
+7 8 0
+
+MATRICEA DE PLACUTE BLOCATE (0 - DEBLOCAT, 1 - BLOCAT)
+0 0 0
+0 0 0
+0 0 0
+---------------------------------
+Cost: 1
+Lungime:2
+Nr de noduri maxim in memorie: 5
+TIMP EFECTUAT: 0 ms
+=======================================================
+
+
+##################
+Solutii obtinute cu A* euristica neadmisibila:
+Solutie: 1
+1 2 3
+4 5 6
+7 0 8
+
+MATRICEA DE PLACUTE BLOCATE (0 - DEBLOCAT, 1 - BLOCAT)
+0 0 0
+0 0 0
+0 0 0
+---------------------------------
+1 2 3
+4 5 6
+7 8 0
+
+MATRICEA DE PLACUTE BLOCATE (0 - DEBLOCAT, 1 - BLOCAT)
+0 0 0
+0 0 0
+0 0 0
+---------------------------------
+Cost: 1
+Lungime:2
+Nr de noduri maxim in memorie: 5
+TIMP EFECTUAT: 0 ms
+=======================================================
+
+
+##################
+Solutii obtinute cu Greedy euristica banala:
+Solutie: 1
+1 2 3
+4 5 6
+7 0 8
+
+MATRICEA DE PLACUTE BLOCATE (0 - DEBLOCAT, 1 - BLOCAT)
+0 0 0
+0 0 0
+0 0 0
+---------------------------------
+1 2 3
+4 5 6
+7 8 0
+
+MATRICEA DE PLACUTE BLOCATE (0 - DEBLOCAT, 1 - BLOCAT)
+0 0 0
+0 0 0
+0 0 0
+---------------------------------
+Cost: 1
+Lungime:2
+Nr de noduri maxim in memorie: 5
+TIMP EFECTUAT: 1 ms
+=======================================================
+
+
+##################
+Solutii obtinute cu Greedy euristica admisibila 1:
+Solutie: 1
+1 2 3
+4 5 6
+7 0 8
+
+MATRICEA DE PLACUTE BLOCATE (0 - DEBLOCAT, 1 - BLOCAT)
+0 0 0
+0 0 0
+0 0 0
+---------------------------------
+1 2 3
+4 5 6
+7 8 0
+
+MATRICEA DE PLACUTE BLOCATE (0 - DEBLOCAT, 1 - BLOCAT)
+0 0 0
+0 0 0
+0 0 0
+---------------------------------
+Cost: 1
+Lungime:2
+Nr de noduri maxim in memorie: 5
+TIMP EFECTUAT: 0 ms
+=======================================================
+
+
+##################
+Solutii obtinute cu Greedy euristica admisibila 2:
+Solutie: 1
+1 2 3
+4 5 6
+7 0 8
+
+MATRICEA DE PLACUTE BLOCATE (0 - DEBLOCAT, 1 - BLOCAT)
+0 0 0
+0 0 0
+0 0 0
+---------------------------------
+1 2 3
+4 5 6
+7 8 0
+
+MATRICEA DE PLACUTE BLOCATE (0 - DEBLOCAT, 1 - BLOCAT)
+0 0 0
+0 0 0
+0 0 0
+---------------------------------
+Cost: 1
+Lungime:2
+Nr de noduri maxim in memorie: 5
+TIMP EFECTUAT: 0 ms
+=======================================================
+
+
+##################
+Solutii obtinute cu Greedy euristica neadmisibila:
+Solutie: 1
+1 2 3
+4 5 6
+7 0 8
+
+MATRICEA DE PLACUTE BLOCATE (0 - DEBLOCAT, 1 - BLOCAT)
+0 0 0
+0 0 0
+0 0 0
+---------------------------------
+1 2 3
+4 5 6
+7 8 0
+
+MATRICEA DE PLACUTE BLOCATE (0 - DEBLOCAT, 1 - BLOCAT)
+0 0 0
+0 0 0
+0 0 0
+---------------------------------
+Cost: 1
+Lungime:2
+Nr de noduri maxim in memorie: 5
+TIMP EFECTUAT: 1 ms
+=======================================================
