@@ -35,4 +35,4 @@ Dacă ai și tu materiale și vrei să contribui, ești oricând bine-venit!
 * [prbd](https://github.com/tr0yyy/teme-fmi-cti/tree/master/prbd): Proiectarea Bazelor de Date
 * [tw](https://github.com/tr0yyy/teme-fmi-cti/tree/master/tw): Tehnici Web
 * [so](https://github.com/tr0yyy/teme-fmi-cti/tree/master/so): Sisteme de Operare
-* [asc(an3)](https://github.com/tr0yyy/teme-fmi-cti/tree/master/asc(an3): Arhitectura Sistemelor de Calcul (Măgurele)
+* [asc](https://github.com/tr0yyy/teme-fmi-cti/tree/master/asc(an3): Arhitectura Sistemelor de Calcul (Măgurele)
