@@ -1,0 +1,443 @@
+Utilizarea sistemelor de operare
+
+numele: Vîrtopeanu Sebastian-Filip
+
+grupa: 164
+
+adresa e-mail: sebastian-filip.virtopeanu@s.unibuc.ro
+
+Instructiuni de completare:
+- Completati antetul cu datele personale.
+- Inserati rezolvarea fiecarui subiect in acest fisier, dupa 'Rezolvare'.
+- Rezolvarile care cer generarea de cod vor fi punctate doar daca codul
+    este compilabil si fara warning cu optiunea '-Wall' (chiar daca rezolva
+    incomplet cerinta sau face erori la executie).
+- Redenumiti acest fisier sub forma urmatoare (inlocuind adecvat grupa, nume,
+    prenume, data in format zzllaaaa):
+ 
+      uso_grupa_nume_prenume_data.txt
+
+- Atasati fisierul unui mesaj e-mail care are ca subiect un text identic cu
+    numele fisierului (fara .txt) si pe care il trimiteti in intervalul orar
+    al probei de la adresa dumneavoastra institutionala (fmi sau unibuc) la
+    ambele adrese urmatoare: dragulicid@yahoo.com si dra@fmi.unibuc.ro
+
+
+1. Consideram executarea urmatorului cod C:
+
+   int n = -1;
+   while(fork()) do if(n -=- 1) exit(n); while(fork());
+   printf("%d\n", n);
+
+   Cate procese apar in total (incluzand si procesul initial) ?
+   Descrieti dependentele acestor procese prin perechi de forma
+ p1(n1) -> p2(n2), insemnand: procesul p1 afisaza n1 si genereaza
+ procesul p2 care afisaza n2; daca un proces p nu afisaza nimic,
+ notati p(x).
+   Justificati raspunsurile.
+   Completati codul la un program intreg care, in plus, sa afiseze si PID-ul
+ parintelui si PID-ul propriu (pentru a putea dovedi cele afirmate mai
+ devreme). Este permisa doar inserarea de cod si schimbarea indentarii, nu si
+ stergerea sau modificarea codului existent.
+
+Rezolvare:
+==========
+Din aceasta secventa de program putem spun ca impreuna cu procesul initial rezulta 4 procese deoarece fork() returneaza 0 in caz
+de succes, asta indicand faptul ca este pe ramura cu copilul, si id tatalui  n=-1 cand n=1 unde va da exit, pentru fiecare pas n= n - (-1))
+Primul si al treilea proces nu afiseaza nimic, in timp ce al doilea -1 afiseaza 0, el ar fi afisat si 1, dar conditia if( n==1) il face sa dea exit.
+Impreuna cu cel initial ajungem la numarul de 4 procese.
+p1->p2
+p2->p3
+p2->p4
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <sys/mman.h>
+#include <sys/types.h>
+#include <sys/wait.h>
+#include <unistd.h>
+#include <errno.h>
+ 
+ 
+int main(int argc, char* argv[]) {
+
+
+
+
+     int n = -1;
+     pid_t pid;
+   while(fork()){
+        pid=getppid();
+        printf("pid_curent: %d\n", pid);
+       
+        do{   
+             if(n -=- 1) exit(n);
+              } while(fork());
+             }
+             pid=getppid();
+        printf("pid_curent: %d\n", pid);
+   printf("%d\n", n);
+    return 0;
+}
+
+
+
+
+2. Consideram urmatorul program C, care isi propune sa calculeze
+ suma 1 + ... + n dupa formula lui Gauss:
+
+#include <sys/types.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include <stdio.h>
+int main(int argc, char *argv[]) {
+ int d[2], n, s;
+ printf("Suma lui Gauss 1 + ... + %d = ", atoi(argv[1]));
+ pipe(d);
+ for(n=1; n <= atoi(argv[1]); ++n)
+   if(!fork())
+     {dup2(d[1],1); close(d[0]); close(d[1]); printf("%d\n", n); exit(0);}
+ dup2(d[0], 0); close(d[0]); close(d[1]);
+ s = 0; while(scanf("%d", &n) > 0) s += n;
+ printf("%d\n", s);
+ return 0;
+}
+
+Daca fisierul sursa este 'test.c', vom avea la testare:
+
+$gcc -o test test.c
+$./test 10
+Suma lui Gauss 1 + ... + 10 = 0
+
+De unde provine eroarea (rezultatul corect ar fi fost 55) ?
+Inserati in program o singura instructiune in plus, astfel incat programul
+ sa devina corect (nu este permisa modificarea codului deja scris).
+
+Rezolvare:
+==========
+Eroare acestui program provine din citire din tub, dintr-un tub nu putem citi partial. Si din cauza ca iesirea stdout si 
+iesirea tubului(unul dintre capete) se incurca intre ele, asa ca ar fi benefic sa curatam iesirea.
+
+#include <sys/types.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include <stdio.h>
+int main(int argc, char *argv[]) {
+ int d[2], n, s;
+ printf("Suma lui Gauss 1 + ... + %d = ", atoi(argv[1]));
+fflush(stdout);
+ pipe(d);
+ for(n=1; n <= atoi(argv[1]); ++n)
+   if(!fork())
+     {dup2(d[1],1); close(d[0]); close(d[1]); printf("%d\n", n); exit(0);}
+ dup2(d[0], 0); close(d[0]); close(d[1]);
+ s = 0; while(scanf("%d", &n) > 0) s += n;
+ printf("%d\n", s);
+ return 0;
+}
+
+
+3. Consideram urmatorul program C, in care un proces primeste un intreg
+ ca argument in linia de comanda, genereaza atatea procese copil cat arata
+ argumentul, fiecare copil trimite parintelui cate un semnal cu 'kill()'
+ iar parintele numara semnalele primite cu un handler si afisaza in final
+ totalul:
+
+#include <sys/types.h>
+#include <sys/wait.h>
+#include <signal.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include <stdio.h>
+volatile int s = 0;
+void h(int n) {signal(n, h); ++s;}
+int main(int argc, char *argv[]) {
+ sigset_t ms; int n;
+ for(n = 1; n < NSIG; ++n) signal(n, h);
+ sigfillset(&ms); sigprocmask(SIG_SETMASK, &ms, NULL);
+ sigemptyset(&ms);
+ for(n = 1; n <= atoi(argv[1]); ++n)
+   if(fork()) sigsuspend(&ms);
+         else {kill(getppid(), 1 + rand() % 3); exit(0);}
+ while(wait(NULL) != -1);
+ printf("%d\n", s);
+ return 0;
+}
+
+Daca fisierul sursa este 'test.c', putem avea la testare:
+
+$gcc -o test test.c
+$./test 100
+113
+$./test 100
+141
+$./test 100
+132
+
+De ce afisaza parintele mai multe semnale decat trimit copii cu
+ 'kill()' ?
+Inserati in program o singura instructiune in plus, astfel incat programul sa
+ calculeze corect numarul (nu este permisa modificarea codului deja scris).
+
+
+
+Rezolvare:
+==========
+Parintele afiseaza mai multe semnale decat copii ptc la final nu se asigura daca copilul 
+a fost eliminat de aceea apar neregularitati, putem observa ca de fiecare data e diferit,
+astfel pe un shell care nu are alte reziduri raspunsul va fi corect mereu. De aceea vom trimite
+SIGKILL catre copil al final.Scapam de copii zombie.
+
+#include <sys/types.h>
+#include <sys/wait.h>
+#include <signal.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include <stdio.h>
+volatile int s = 0;
+void h(int n) {signal(n, h); ++s;}
+int main(int argc, char *argv[]) {
+           
+ sigset_t ms; int n;
+ for(n = 1; n < NSIG; ++n) signal(n, h);
+ sigfillset(&ms); sigprocmask(SIG_SETMASK, &ms, NULL);
+ sigemptyset(&ms);
+ for(n = 1; n <= atoi(argv[1]); ++n)
+   {if(fork()) sigsuspend(&ms);
+         else {kill(getppid(), 1 + rand() % 3); exit(0);
+          
+         kill(getppid(), SIGKILL);}
+         }
+ while(wait(NULL) != -1){};
+ printf("%d\n", s);
+ return 0;
+}
+
+
+
+seby@DESKTOP-N1SASIT:/mnt/c/USERS/SEBI/Desktop/USO$ gcc -Wall signals.c -o sb
+seby@DESKTOP-N1SASIT:/mnt/c/USERS/SEBI/Desktop/USO$ ./sb 111
+111
+seby@DESKTOP-N1SASIT:/mnt/c/USERS/SEBI/Desktop/USO$ ./sb 191
+191
+seby@DESKTOP-N1SASIT:/mnt/c/USERS/SEBI/Desktop/USO$ ./sb 189
+189
+seby@DESKTOP-N1SASIT:/mnt/c/USERS/SEBI/Desktop/USO$ ./sb 112
+112
+seby@DESKTOP-N1SASIT:/mnt/c/USERS/SEBI/Desktop/USO$ ./sb 120
+120
+
+
+Din exemplul meu fiecare raspuns este corect.
+4. Scrieti o functie in limbajul C:
+
+    int upclin(char *numefis);
+
+ care converteste la litera mare (upcase) ultimul caracter din fiecare
+ linie din fisierul specificat de 'numefis'; upcase-ul unei litere mici
+ se obtine scazand din codul ei 32 (codul caracterulul ' '), iar upcase-ul
+ unui caracter care nu este litera mica este el insusi; un caracter este la
+ sfarsit de linie daca este urmat de '\n' sau de sfarsitul fisierului.
+   Functia returneaza numarul de caractere care au fost modificate sau -1
+ in caz de eroare.
+   Memoria folosita va fi limitata de o constanta (deci, nu se va incarca tot
+ continutul fisierului in memorie) iar la iesirea din functie fisierul va fi
+ inchis.
+   Pentru scrierea functiei, completati programul urmator, inlocuind cele
+ doua comentarii:
+
+/* fisiere header */
+
+int upclin(char *numefis) {
+
+/* corpul functiei */
+
+}
+
+int main(int argc, char *argv[]) {
+  int k;
+  if(argc != 2)
+    {fprintf(stderr, "Utilizare: %s fisier\n", argv[0]); return 1;}
+  if((k = upclin(argv[1])) == -1)
+    {perror(argv[1]); return  1;}
+  printf("%d\n", k);
+  return 0;
+}
+
+  Exemplu de testare (presupunem ca programul executabil este 'prog'):
+
+$echo abc def > f ; echo ij2 >> f ; echo ghi jk >> f
+$./prog f
+2
+$cat f
+abc deF
+ij2
+ghi jK
+$echo abc def > f ; echo ij2 >> f ; echo -n ghi jk >> f
+$./prog f
+2
+$cat f
+abc deF
+ij2
+ghi jK$
+
+Rezolvare:
+==========
+#include <stdio.h>
+#include <stdlib.h>
+#include <sys/mman.h>
+#include <sys/types.h>
+#include <sys/wait.h>
+#include <unistd.h>
+#include <errno.h>
+#include <string.h>
+ int upclin(char *numefis) {
+
+ FILE *fp;
+
+    fp = fopen(numefis,"r+");
+    if(fp == NULL){
+    puts("Open file failed\n");
+    exit(-1);
+    }
+
+int maximumLineLength = 128;
+    char *lineBuffer = (char *)malloc(sizeof(char) * maximumLineLength);
+
+    if (lineBuffer == NULL) {
+        printf("Eroare alocare memorie.");
+        exit(1);
+    }
+
+    //char ch = getc(fp);
+    int count = 0;
+
+    
+
+    while(fgets(lineBuffer, 128, fp)){
+
+
+  
+     
+    lineBuffer[0]=lineBuffer[0]-32;
+    fputs(lineBuffer , fp);
+    if (count == maximumLineLength) {
+            maximumLineLength += 128;
+            lineBuffer = realloc(lineBuffer, maximumLineLength);
+            if (lineBuffer == NULL) {
+                printf("Eroare.");
+                exit(1);
+            }
+        }
+        
+        count++;
+    }
+   
+  
+    free(lineBuffer);
+    printf("Numarul de modificari:%d\n", count);
+    return count;
+}
+
+
+
+int main(int argc, char *argv[]) {
+  int k;
+  if(argc != 2)
+    {fprintf(stderr, "Utilizare: %s fisier\n", argv[0]); return 1;}
+  if((k = upclin(argv[1])) == -1)
+    {perror(argv[1]); return  1;}
+  printf("%d\n", k);
+  return 0;
+}
+
+5. Scrieti un program in limbajul C care primeste ca argument in linia
+ de comanda specificatorul unui director si efectueaza urmatoarele:
+ - creaza in directorul curent un subdirector cu numele proprietarului
+  efectiv al procesului apelant si cu drepturi de citire, scriere si
+  executie pentru proprietar;
+ - creaza in noul director legaturi simbolice catre fisierele obisnuite
+  (regular) din directorul dat ca argument in linia de omanda; numele
+  legaturilor simbolice va coincide cu numele fisierelor referite;
+ - daca un fisier sursa nu poate fi accesat, sau nu se poate crea legatura
+  simbolica, se semnaleaza eroare dar se continua cu fisierele urmatoare.
+ Putem presupune ca toti specificatorii sunt siruri nevide, nu sunt
+ terminate cu "/" si au cel mult PATH_MAX - 1 caractere.
+
+Exemplu de testare (presupunem ca programul este "./prog"):
+
+$ls -l test
+total 12
+-rw-rw-r-- 1 dragulici dragulici    5 Jan  8 16:04 a
+drwxrwxr-x 2 dragulici dragulici 4096 Jan  8 16:04 b
+-rw-rw-r-- 1 dragulici dragulici    5 Jan  8 16:04 c
+$./prog test
+$ls -l dragulici
+total 0
+lrwxrwxrwx 1 dragulici dragulici 6 Jan  8 16:10 a -> test/a
+lrwxrwxrwx 1 dragulici dragulici 6 Jan  8 16:10 c -> test/c
+
+Rezolvare:
+==========
+#include <conio.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <unistd.h>
+#include <stdio.h>
+#include <stdlib.h>
+ #include <pwd.h>
+  
+ 
+int main(int argc, char **argv) {
+
+          int check;
+    char* dirname = getpwnam();
+    clrscr();
+    errno = 0;
+    check = mkdir(dirname,0777);
+  
+     
+    if (!check)
+        printf("Succes a fost creat\n");
+    else {
+        printf("nu poate fi creat\n");
+        exit(1);
+    }
+    switch (errno) {
+            case EACCES :
+                printf("nu permite scrierea");
+                exit(EXIT_FAILURE);
+            case EEXIST:
+                printf("deja exista");
+                exit(EXIT_FAILURE);
+            case ENAMETOOLONG:
+                printf("prea lung path");
+                exit(EXIT_FAILURE);
+            default:
+                perror("mkdir");
+                exit(EXIT_FAILURE);
+        }
+  
+    getch();
+  
+    system("dir");
+    getch();
+}
+ 
+
+6. Scrieti un program in limbajul C care primeste ca argumente in linia
+ de comanda 3 programe (specificatorii fisierelor executabile) si le
+ lanseaza ca procese copil a.i. sa formeze un filtru circular. De exemplu,
+ daca programele sunt 'p0', 'p1', 'p2', ele vor comunica prin tuburi astfel:
+
+    --> p0 ---> p1 ---> p2 -->  (fiecare proces are stdin la tubul din stanga
+    |                        |   si stdout la tubul din dreapta)
+    --------------------------
+ Atat parintele comun cat si copiii isi vor inchide descriptorii nefolositi
+ pe tuburi, a.i. in timpul rularii copiilor tuburile vor avea cate un singur
+ scriitor si un singur cititor.
+ Procesul initial va astepta terminarea copiilor si va afisa numele celor
+ care s-au terminat normal.
+
+ Rezolvare:
+ ==========

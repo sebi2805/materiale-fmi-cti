@@ -1,0 +1,19 @@
+#include<stdio.h>
+#include<string.h>
+void main()
+{
+char fn[30],pat[30],temp[200];
+FILE *fp;
+printf("Spune numele fisierului\n");
+scanf("%s",fn);
+printf("Si ce cautam\n");
+scanf("%s",pat);
+fp=fopen(fn,"r");
+while(!feof(fp))
+{
+fgets(temp,1000,fp);
+if(strstr(temp,pat)!=NULL)
+printf("%s",temp);
+}
+fclose(fp);
+}
