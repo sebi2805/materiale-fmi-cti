@@ -1,0 +1,6 @@
+pid_t p;
+switch(p = fork()) {
+case -1: perror("fork()"); break;
+case 0: /* copil */ break;
+default: /* parinte, are PID-ul copilului in p */
+}

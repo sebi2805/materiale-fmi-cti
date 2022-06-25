@@ -1,0 +1,45 @@
+#include<stdio.h>
+#include<string.h>
+#include<sys/types.h>
+#include<pwd.h>
+#include<errno.h>
+ 
+struct fisier{
+          int nr_linii;
+          int linii[50][200];   // As fi facut cu **, dar ajungeam sa o stric 
+};
+struct fisier citeste_fisiere( char path_fisier[]){
+          fisier fisier1;
+          fisier1.nr_linii=0;
+          int lungime_linie;
+          FILE *fisier_adv = fopen(path_fisier, "r");
+          if(fisier_adv == NULL){
+    printf("Open file failed\n");
+    exit(-1);
+    }
+while(fgets(fisier1.linii[fisier1.nr_linii], 255, fisier_adv)){
+          lungime_linie=strlen(fisier1.linii[fisier1.nr_linii])-1;
+fisier1.linii[fisier1.nr_linii][lungime_linie]="/0";
+fisier1.nr_linii+=1;
+
+}
+fclose(fisier_adv);
+return fisier1;
+}
+void _grep(fisier filess[]){
+          for(int i=0; i<filess[0].nr_linii-1, i++)
+          for(int j=0; j<filess[1].nr_linii-1, j++){
+                    if(strstr(filess[1].linii[j], filess[0].linii[i])!=NULL)
+                    printf("%s\n",filess[1].linii[j]);
+          }
+}
+
+
+
+int main(int argc, char**argv){
+           fisier filesss[2];
+           filesss[0]=citeste_fisiere(argv[1]);
+           filesss[1]=citeste_fisiere(argv[2]);
+           grep(filesss);
+           return 0;
+}

@@ -1,0 +1,34 @@
+#include <sys/types.h>
+#include <signal.h>
+#include <unistd.h>
+#include <stdio.h>
+void h(int n) {signal(n, h);}
+int main() {
+sigset_t ms; pid_t pid[10]; int i;
+signal(SIGTERM, h);
+sigemptyset(&ms); sigaddset(&ms, SIGTERM);
+sigprocmask(SIG_SETMASK, &ms, NULL);
+sigemptyset(&ms);
+//////////////////////////////
+//////////////////////////////
+void f(int n){signal(n,f);}
+void g(int n){signal(n,g); ++nr;}
+void h(int n){printf("Primit: %d\n", nr); exit(0);}
+int main(){
+pid_t p; sigset_t ms;
+sigemptyset(&ms); sigaddset(&ms,SIGUSR1); sigaddset(&ms,SIGUSR2);
+sigprocmask(SIG_SETMASK,&ms,NULL); sigemptyset(&ms);
+if(p=fork()){
+signal(SIGUSR1,f);
+for(nr = 0; nr < 2000; ++nr) {kill(p,SIGUSR1); sigsuspend(&ms);}
+kill(p, SIGUSR2);
+wait(NULL);
+}else{
+p=getppid(); nr = 0; signal(SIGUSR1, g); signal(SIGUSR2, h);
+while(1){sigsuspend(&ms); kill(p,SIGUSR1);}
+}
+return 0;
+}
+$gcc -o prog prog.c
+$./prog
+Primit: 2000
